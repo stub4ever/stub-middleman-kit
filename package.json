@@ -1,0 +1,42 @@
+{
+  "name": "stub-middleman-kit",
+  "version": "1.0.0",
+  "description": "an Middleman static websites framework with Gulp as automatic workflow",
+  "main": "all.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "stub4ever/stub-middleman-kit"
+  },
+  "author": " Van Quoc Bui",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "5.8.23",
+    "babelify": "6.4.0",
+    "browser-sync": "2.9.11",
+    "browserify": "11.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "3.1.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-newer": "^1.1.0",
+    "gulp-notify": "2.2.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-swig": "^0.8.0",
+    "gulp-uglify": "1.4.2",
+    "gulp-util": "3.0.7",
+    "gulp-wait": "0.0.2",
+    "imagemin-pngquant": "^4.2.2",
+    "node-bourbon": "^4.2.8",
+    "node-neat": "^1.7.2",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.4.0"
+  },
+  "dependencies": {}
+}

@@ -20,7 +20,7 @@ This is my personal starting point for front-end development, it contains:
 
 ## Architecture
 
-    boilerplate/
+    name-project/
     ├── dist/
     │    └── ...
     │

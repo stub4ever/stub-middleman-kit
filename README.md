@@ -15,7 +15,7 @@ A Starter Kit for front-end development, it contains:
  - [Normalize](https://necolas.github.io/normalize.css/) A modern, HTML5-ready alternative to CSS resets
  - [Bourbon](https://github.com/thoughtbot/bourbon) Mixin library for Sass
  - [Neat](https://github.com/thoughtbot/neat) Semantic grid framework for Sass
- - erb as a template engine for app views
+ - Slim as a template engine for app views
  - gulp integration through middleman's [external asset pipeline](https://middlemanapp.com/advanced/external-pipeline)
 
 ## Architecture
@@ -31,7 +31,7 @@ A Starter Kit for front-end development, it contains:
          │      └── all.js
          │
          ├── layouts/
-         │      └── layout.erb
+         │      └── layout.slim
          │
          ├── stylesheets/
          │      ├── compoments/
@@ -43,7 +43,7 @@ A Starter Kit for front-end development, it contains:
          │      │     └── _index.scss
          │      └── all.scss
          │
-         └── index.html.erb
+         └── index.html.slim
          
 ## Installation Stub Middleman Kit
 

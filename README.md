@@ -18,7 +18,33 @@ This is my personal starting point for front-end development, it contains:
  - erb as a template engine for app views
  - gulp integration through middleman's [external asset pipeline](https://middlemanapp.com/advanced/external-pipeline)
 
+## Architecture
 
+    boilerplate/
+    ├── dist/
+    │    └── ...
+    │
+    └── source/
+         ├── images/
+         │
+         ├── javascripts/
+         │      └── all.js
+         │
+         ├── layouts/
+         │      └── layout.erb
+         │
+         ├── stylesheets/
+         │      └── compoments/
+         │      └── pages/
+         │      │     └── _home.scss
+         │      │     └── _index.scss
+         │      └── utils/
+         │      │     └── _normalize.scss
+         │      │     └── _index.scss
+         │      └── all.scss
+         │
+         └── index.html.erb
+         
 ## Installation Stub Middleman Kit
 
 Using templates with Middleman is incredibly easy, you just need to reference
@@ -59,6 +85,9 @@ middleman build [--clean]
 middleman deploy [--build-before]
 ```
 
+## Contributing
+If you have problems, please create a [GitHub Issue](https://github.com/stub4ever/stub-middleman-kit/issues).
+Have a fix or want to add a feature? [Pull Requests](https://github.com/stub4ever/stub-middleman-kit/pulls) are welcome!
 
 
 

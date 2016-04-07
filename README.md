@@ -34,12 +34,12 @@ This is my personal starting point for front-end development, it contains:
          │      └── layout.erb
          │
          ├── stylesheets/
-         │      └── compoments/
-         │      └── pages/
-         │      │     └── _home.scss
+         │      ├── compoments/
+         │      ├── pages/
+         │      │     ├── _home.scss
          │      │     └── _index.scss
-         │      └── utils/
-         │      │     └── _normalize.scss
+         │      ├── utils/
+         │      │     ├── _normalize.scss
          │      │     └── _index.scss
          │      └── all.scss
          │

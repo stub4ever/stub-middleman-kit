@@ -37,6 +37,7 @@ jspm_packages
 log
 *~
 .*.swp
+.sass-cache/
 
 # Ignore files that are generated in the build.
 out/

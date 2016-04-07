@@ -28,7 +28,7 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 
 
-// Configuration
+// Setup your Configuration
 var paths = {
   'stylesheetsEntryPoint': 'source/stylesheets/all.scss',
   'stylesheets': 'source/stylesheets/**/*.scss',

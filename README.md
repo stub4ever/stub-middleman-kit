@@ -2,7 +2,7 @@
 
 This is an Middleman static websites framework with Gulp as automatic workflow.
 
-This is my personal starting point for front-end development, it contains:
+A Starter Kit for front-end development, it contains:
  - [Middleman](https://middlemanapp.com/) Build static websites with an easy-to-use framework
  - [Gulp](https://github.com/gulpjs/gulp) for asset bundling (JS/CSS/Fonts/Sass/images) with Browser-sync
  - [Browser-sync](https://github.com/BrowserSync/browser-sync) Keep multiple browsers & devices in sync when building websites

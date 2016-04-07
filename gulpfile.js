@@ -35,7 +35,7 @@ var paths = {
   'stylesheetsDist': './dist/stylesheets',
 
   'fontsEntryPoint': '/source/stylesheets/fonts/**.*',
-  'fontsDist': 'dist/css/fonts',
+  'fontsDist': 'dist/stylesheets/fonts',
 
   'views': 'source/**/*.slim',
 
@@ -173,7 +173,7 @@ gulp.task('scripts', function() {
 });
 
 // run 'scripts' task first, then watch for future changes
-gulp.task('watch',['images','stylesheets', 'scripts', 'browser-sync'], function() {
+gulp.task('watch',['images', 'stylesheets', 'scripts', 'browser-sync'], function() {
   gulp.watch(paths.stylesheets, ['stylesheets']); // gulp watch for sass changes
 
   gulp.watch([paths.views], function (e){ // gulp watch for erb changes
@@ -190,3 +190,5 @@ gulp.task('watch',['images','stylesheets', 'scripts', 'browser-sync'], function(
   return buildScript(paths.javascriptMainFile, true); // browserify watch for JS changes
 });
 
+// Default task for running 'middleman build'
+gulp.task('default', ['stylesheets', 'scripts', 'images']);

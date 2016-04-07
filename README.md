@@ -44,7 +44,7 @@ A Starter Kit for front-end development, it contains:
          │      └── all.scss
          │
          └── index.html.slim
-         
+
 ## Installation Stub Middleman Kit
 
 Using templates with Middleman is incredibly easy, you just need to reference
@@ -65,6 +65,25 @@ npm install
 Now you can simply run $``middleman``. This will start the BrowserSync proxy
 and it will open for you. You can then edit your stylesheets, images, javascript and views and your
 browser will automatically reload on all devices.
+
+## Installation Stub Middleman Kit
+
+Using templates with Middleman is incredibly easy, you just need to reference
+the repository for the template in the ``--template`` flag when you call
+``middleman init``. It looks like this:
+
+```
+middleman init name-project --template=stub4ever/stub-middleman-kit
+```
+
+## Deploy A Static Build
+
+After building the site you have everything you need within the build-directory. There are nearly limitless ways to deploy a static build.
+A very handy tool to deploy a build is running:
+
+```
+middleman build
+```
 
 ## Contributing
 If you have problems, please create a [GitHub Issue](https://github.com/stub4ever/stub-middleman-kit/issues).

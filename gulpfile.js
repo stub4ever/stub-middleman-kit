@@ -28,15 +28,23 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 
 
-// Configuration
+// Setup your Configuration
 var paths = {
   'stylesheetsEntryPoint': 'source/stylesheets/all.scss',
   'stylesheets': 'source/stylesheets/**/*.scss',
-  'fonts': '/source/stylesheets/fonts/**.*',
+  'stylesheetsDist': './dist/stylesheets',
+
+  'fontsEntryPoint': '/source/stylesheets/fonts/**.*',
+  'fontsDist': 'dist/css/fonts',
+
   'views': 'source/**/*.erb',
 
-  'imgSrc': 'source/images/**/*.+(png|jpg|jpeg|gif|svg)',
-  'imgDst': './dist/images'
+  'imageEntryPoint': 'source/images/**/*.+(png|jpg|jpeg|gif|svg)',
+  'imageDist': './dist/images',
+
+  'javascriptMainFile': 'all.js',
+  'javascriptsEntryPoint': './source/javascripts/',
+  'javascriptsDist': './dist/javascripts/'
   // 'buildFolder': 'build'
 };
 
@@ -46,11 +54,11 @@ var paths = {
 
 gulp.task('stylesheets',function() {
   // move over fonts
-  gulp.src(paths.fonts)
-    .pipe(gulp.dest('dist/css/fonts'))
+  gulp.src(paths.fontsEntryPoint)
+    .pipe(gulp.dest(paths.fontsDist))
 
   // Compiles CSS
-  var postCssPlugins = [
+  var postCssPlugins = [ // add PostCssPlugins
   ];
 
   gulp.src(paths.stylesheetsEntryPoint)  // take all.scss only
@@ -61,10 +69,11 @@ gulp.task('stylesheets',function() {
       //.pipe(postcss(postCssPlugins)) // use Postcss Plugins
     .pipe( autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
      //.pipe(gulp.dest(paths.buildFolder + '/stylesheets')) // build new folder
+    .pipe(gulp.dest(paths.stylesheetsDist))
     .pipe(rename({ suffix: '.min' }))
     .pipe(cssnano())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist/stylesheets'))
+    .pipe(gulp.dest(paths.stylesheetsDist))
     .pipe(wait(1000))
     .pipe(reload({stream:true}))
     .pipe(notify({ message: 'Stub: Styles task complete' }));
@@ -74,14 +83,14 @@ gulp.task('stylesheets',function() {
   Images
 */
 gulp.task('images', function() {
-  gulp.src(paths.imgSrc)
+  gulp.src(paths.imageEntryPoint)
     .pipe(cache(imagemin({
         progressive: true,
         svgoPlugins: [{removeViewBox: false}],
         interlaced: true, // GIFs by setting the interlaced option key to true
         use: [pngquant()]
     })))
-    .pipe(gulp.dest(paths.imgDst))
+    .pipe(gulp.dest(paths.imageDist))
     .pipe(reload({stream:true}))
     .pipe(notify({ message: 'Stub: Image Update Successfully' }));
 });
@@ -124,7 +133,7 @@ function handleErrors() {
 
 function buildScript(file, watch) {
   var props = {
-    entries: ['./source/javascripts/' + file],
+    entries: [paths.javascriptsEntryPoint + file],
     debug : true,
     cache: {},
     packageCache: {},
@@ -139,11 +148,11 @@ function buildScript(file, watch) {
     return stream
       .on('error', handleErrors)
       .pipe(source(file))
-      .pipe(gulp.dest('./dist/javascripts/'))
+      .pipe(gulp.dest(paths.javascriptsDist))
       .pipe(buffer())
       .pipe(uglify())
-      .pipe(rename('app.min.js'))
-      .pipe(gulp.dest('./dist/javascripts/'))
+      .pipe(rename('all.min.js'))
+      .pipe(gulp.dest(paths.javascriptsDist))
       .pipe(wait(1000))
       .pipe(reload({stream:true}))
       .pipe(notify({ message: 'Stub: Scripts task complete' }));
@@ -160,7 +169,7 @@ function buildScript(file, watch) {
 }
 
 gulp.task('scripts', function() {
-  return buildScript('all.js', false); // this will run once because we set watch to false
+  return buildScript(paths.javascriptMainFile, false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
@@ -173,11 +182,11 @@ gulp.task('watch',['images','stylesheets', 'scripts', 'browser-sync'], function(
         .pipe(reload({stream:true}));
   });
 
-  gulp.watch([paths.imgSrc], function (callback){ // gulp watch for image changes
+  gulp.watch([paths.imageEntryPoint], function (callback){ // gulp watch for image changes
         gulp.src(callback.path)
         gulp.run('callbackImg');
   });
 
-  return buildScript('all.js', true); // browserify watch for JS changes
+  return buildScript(paths.javascriptMainFile, true); // browserify watch for JS changes
 });
 

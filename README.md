@@ -62,28 +62,9 @@ dependencies. You will need Node.js and npm on your system.
 cd name-project
 npm install
 ```
-
 Now you can simply run $``middleman``. This will start the BrowserSync proxy
 and it will open for you. You can then edit your stylesheets, images, javascript and views and your
 browser will automatically reload on all devices.
-
-## Exporting the Static Site
-
-Finally, when you are ready to deliver static code or, in the case of "blog mode", host a static blog, you will need to build the site. Using the command-line, from the project folder, run $ ``middleman build``:
-
-```
-cd name-project
-bundle exec middleman build
-```
-
-## Deploying the site
-
-A very handy tool to deploy a build is $ ``middleman-deploy``. It can deploy a site via rsync, ftp, sftp, or git.
-
-```
-middleman build [--clean]
-middleman deploy [--build-before]
-```
 
 ## Contributing
 If you have problems, please create a [GitHub Issue](https://github.com/stub4ever/stub-middleman-kit/issues).

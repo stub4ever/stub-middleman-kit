@@ -1,29 +1,31 @@
 'use strict';
 
-var babelify = require('babelify');
 var browserify = require('browserify');
-var cssnano = require('gulp-cssnano');
+var browserSync = require('browser-sync');
+var del = require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var imagemin = require('gulp-imagemin');
 var notify = require('gulp-notify');
-var postcss = require('gulp-postcss');
-var pngquant = require('imagemin-pngquant');
+var reload = browserSync.reload;
 var rename = require('gulp-rename');
+var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
-var swig = require('gulp-swig');
+var wait = require('gulp-wait');
 var watchify = require('watchify');
 
 var autoprefixer = require('gulp-autoprefixer');
-var buffer = require('vinyl-buffer');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
+var cssnano = require('gulp-cssnano');
+var postcss = require('gulp-postcss');
 var sass = require('gulp-sass');
 
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var wait = require('gulp-wait');
+var cache = require('gulp-cache');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
+
+var babelify = require('babelify');
+var buffer = require('vinyl-buffer');
+var uglify = require('gulp-uglify');
 
 
 // Configuration
@@ -32,7 +34,9 @@ var paths = {
   'stylesheets': 'source/stylesheets/**/*.scss',
   'fonts': '/source/stylesheets/fonts/**.*',
   'views': 'source/**/*.erb',
-  'imgSrc': 'source/images/**'
+
+  'imgSrc': 'source/images/**/*.+(png|jpg|jpeg|gif|svg)',
+  'imgDst': './dist/images'
   // 'buildFolder': 'build'
 };
 
@@ -63,22 +67,23 @@ gulp.task('stylesheets',function() {
     .pipe(gulp.dest('./dist/stylesheets'))
     .pipe(wait(1000))
     .pipe(reload({stream:true}))
-    .pipe(notify({ message: 'Styles task complete' }));
+    .pipe(notify({ message: 'Stub: Styles task complete' }));
 });
 
 /*
   Images
 */
 gulp.task('images', function() {
-  return gulp.src(paths.imgSrc)
-  .pipe(imagemin({
-      progressive: true,
-      svgoPlugins: [{removeViewBox: false}],
-      use: [pngquant()]
-  }))
-    .pipe(gulp.dest('./dist/images'))
+  gulp.src(paths.imgSrc)
+    .pipe(cache(imagemin({
+        progressive: true,
+        svgoPlugins: [{removeViewBox: false}],
+        interlaced: true, // GIFs by setting the interlaced option key to true
+        use: [pngquant()]
+    })))
+    .pipe(gulp.dest(paths.imgDst))
     .pipe(reload({stream:true}))
-    .pipe(notify({ message: 'Image task complete' }));
+    .pipe(notify({ message: 'Stub: Image Update Successfully' }));
 });
 
 /*
@@ -90,6 +95,24 @@ gulp.task('browser-sync', function(){
   });
 });
 
+/*
+  Cleaning Image & callback Image
+*/
+gulp.task('clean:dist', function() {
+  return del.sync([paths.imgDst]);
+});
+
+gulp.task('callbackImg', function(callback) {
+  runSequence(
+    'clean:dist',
+    ['images'],
+    callback
+  )
+})
+
+/*
+ Scripts
+*/
 function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
   notify.onError({
@@ -123,7 +146,7 @@ function buildScript(file, watch) {
       .pipe(gulp.dest('./dist/javascripts/'))
       .pipe(wait(1000))
       .pipe(reload({stream:true}))
-      .pipe(notify({ message: 'Scripts task complete' }));
+      .pipe(notify({ message: 'Stub: Scripts task complete' }));
   }
 
   // listen for an update and run rebundle
@@ -141,7 +164,7 @@ gulp.task('scripts', function() {
 });
 
 // run 'scripts' task first, then watch for future changes
-gulp.task('watch',['images','stylesheets', 'scripts','browser-sync'], function() {
+gulp.task('watch',['images','stylesheets', 'scripts', 'browser-sync'], function() {
   gulp.watch(paths.stylesheets, ['stylesheets']); // gulp watch for sass changes
 
   gulp.watch([paths.views], function (e){ // gulp watch for erb changes
@@ -150,7 +173,11 @@ gulp.task('watch',['images','stylesheets', 'scripts','browser-sync'], function()
         .pipe(reload({stream:true}));
   });
 
+  gulp.watch([paths.imgSrc], function (callback){ // gulp watch for image changes
+        gulp.src(callback.path)
+        gulp.run('callbackImg');
+  });
+
   return buildScript('all.js', true); // browserify watch for JS changes
 });
-
 

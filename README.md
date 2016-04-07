@@ -30,8 +30,7 @@ middleman init name-project --template=stub4ever/stub-middleman-kit
 ```
 
 Once you have the middleman project you will need to install the npm
-dependencies. You will need Node.js and npm, as well as a global install of
-bower on your system.
+dependencies. You will need Node.js and npm on your system.
 
 ```
 cd name-project

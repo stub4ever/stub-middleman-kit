@@ -66,15 +66,6 @@ Now you can simply run $``middleman``. This will start the BrowserSync proxy
 and it will open for you. You can then edit your stylesheets, images, javascript and views and your
 browser will automatically reload on all devices.
 
-## Installation Stub Middleman Kit
-
-Using templates with Middleman is incredibly easy, you just need to reference
-the repository for the template in the ``--template`` flag when you call
-``middleman init``. It looks like this:
-
-```
-middleman init name-project --template=stub4ever/stub-middleman-kit
-```
 
 ## Deploy A Static Build
 

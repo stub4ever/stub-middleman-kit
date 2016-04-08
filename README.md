@@ -1,4 +1,4 @@
-# Stub Middleman Kit
+# Stub Middleman Kit with STYLUS
 
 This is an Middleman static websites framework with Gulp as automatic workflow.
 
@@ -13,8 +13,9 @@ A Starter Kit for front-end development, it contains:
  - [Imagemin](https://github.com/imagemin/imagemin) Minify PNG, JPEG, GIF and SVG images
  - [pngquant](https://github.com/pornel/pngquant) Lossy PNG compressor
  - [Normalize](https://necolas.github.io/normalize.css/) A modern, HTML5-ready alternative to CSS resets
- - [Bourbon](https://github.com/thoughtbot/bourbon) Mixin library for Sass
- - [Neat](https://github.com/thoughtbot/neat) Semantic grid framework for Sass
+ - [Jens](http://jeet.gs/) A grid system for humans
+ - [Nib](https://github.com/tj/nib) Stylus mixins, utilities, components, and gradient image generation
+- [Rupture](https://github.com/jenius/rupture) Simple media queries for stylus.
  - Slim as a template engine for app views
  - gulp integration through middleman's [external asset pipeline](https://middlemanapp.com/advanced/external-pipeline)
 
@@ -41,7 +42,7 @@ A Starter Kit for front-end development, it contains:
          │      ├── pages/
          │      ├── themes/
          │      ├── vendor/
-         │      └── all.scss
+         │      └── all.styl
          │
          └── index.html.slim
 

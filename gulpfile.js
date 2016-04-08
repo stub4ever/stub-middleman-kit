@@ -14,11 +14,11 @@ var sourcemaps = require('gulp-sourcemaps');
 var wait = require('gulp-wait');
 var watchify = require('watchify');
 
-var stylus = require('gulp-stylus');
 var autoprefixer = require('gulp-autoprefixer');
 var cssnano = require('gulp-cssnano');
 var postcss = require('gulp-postcss');
-var sass = require('gulp-sass');
+var nib = require('nib');
+var stylus = require('gulp-stylus');
 
 var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
@@ -31,8 +31,8 @@ var uglify = require('gulp-uglify');
 
 // Setup your Configuration
 var paths = {
-  'stylesheetsEntryPoint': 'source/stylesheets/all.styl',
-  'stylesheets': 'source/stylesheets/**/*.styl',
+  'stylesheetsMainFile': 'source/stylesheets/all.styl',
+  'stylesheetsEntryPoints': 'source/stylesheets/**/*.styl',
   'stylesheetsDist': './dist/stylesheets',
 
   'fontsEntryPoint': '/source/stylesheets/fonts/**.*',
@@ -62,9 +62,12 @@ gulp.task('stylesheets',function() {
   var postCssPlugins = [ // add PostCssPlugins
   ];
 
-  gulp.src(paths.stylesheetsEntryPoint)  // take all.scss only
+  gulp.src(paths.stylesheetsMainFile)  // take all.scss only
       .pipe(stylus({
-
+          paths:  ['node_modules', paths.stylesheetsMainFile],
+          import: ['jeet/stylus/jeet', 'stylus-type-utils', 'nib', 'rupture/rupture'],
+          use: [nib()],
+          'include css': true
         }))
       //.pipe(postcss(postCssPlugins)) // use Postcss Plugins
     .pipe( autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -174,7 +177,7 @@ gulp.task('scripts', function() {
 
 // run 'scripts' task first, then watch for future changes
 gulp.task('watch',['images', 'stylesheets', 'scripts', 'browser-sync'], function() {
-  gulp.watch(paths.stylesheets, ['stylesheets']); // gulp watch for sass changes
+  gulp.watch(paths.stylesheetsEntryPoints, ['stylesheets']); // gulp watch for sass changes
 
   gulp.watch([paths.views], function (e){ // gulp watch for erb changes
         gulp.src(e.path)

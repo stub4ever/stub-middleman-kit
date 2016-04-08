@@ -63,8 +63,8 @@ cd name-project
 npm install
 ```
 Now you can simply run $``middleman``. This will start the BrowserSync proxy
-and it will open for you. You can then edit your stylesheets, images, javascript and views and your
-browser will automatically reload on all devices.
+and it will open for you. You can then edit your stylesheets, images, javascript and slim. 
+Your browser will automatically reload on all devices.
 
 
 ## Deploy A Static Build

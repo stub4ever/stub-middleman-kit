@@ -34,13 +34,13 @@ A Starter Kit for front-end development, it contains:
          │      └── layout.slim
          │
          ├── stylesheets/
-         │      ├── compoments/
+         │      ├── base/
+         │      ├── components/
+         │      ├── helpers/
+         │      ├── layout/
          │      ├── pages/
-         │      │     ├── _home.scss
-         │      │     └── _index.scss
-         │      ├── utils/
-         │      │     ├── _normalize.scss
-         │      │     └── _index.scss
+         │      ├── themes/
+         │      ├── vendor/
          │      └── all.scss
          │
          └── index.html.slim

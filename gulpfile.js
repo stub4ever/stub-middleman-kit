@@ -14,6 +14,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var wait = require('gulp-wait');
 var watchify = require('watchify');
 
+var stylus = require('gulp-stylus');
 var autoprefixer = require('gulp-autoprefixer');
 var cssnano = require('gulp-cssnano');
 var postcss = require('gulp-postcss');
@@ -30,8 +31,8 @@ var uglify = require('gulp-uglify');
 
 // Setup your Configuration
 var paths = {
-  'stylesheetsEntryPoint': 'source/stylesheets/all.scss',
-  'stylesheets': 'source/stylesheets/**/*.scss',
+  'stylesheetsEntryPoint': 'source/stylesheets/all.styl',
+  'stylesheets': 'source/stylesheets/**/*.styl',
   'stylesheetsDist': './dist/stylesheets',
 
   'fontsEntryPoint': '/source/stylesheets/fonts/**.*',
@@ -62,10 +63,9 @@ gulp.task('stylesheets',function() {
   ];
 
   gulp.src(paths.stylesheetsEntryPoint)  // take all.scss only
-      .pipe(sass({
-          includePaths: require('node-bourbon').includePaths,
-          includePaths: require('node-neat').includePaths
-        }).on('error', sass.logError))
+      .pipe(stylus({
+
+        }))
       //.pipe(postcss(postCssPlugins)) // use Postcss Plugins
     .pipe( autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
      //.pipe(gulp.dest(paths.buildFolder + '/stylesheets')) // build new folder

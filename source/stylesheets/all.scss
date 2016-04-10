@@ -1,6 +1,5 @@
 // External libraries
-@import "bourbon";
-@import "neat";
+
 
 // Your CSS
 @import "base/index";          // Base – contains global styles, such as resets, typography, colors, etc.
@@ -11,3 +10,6 @@
 @import "themes/index";        // Themes - Default themes, Admin themes Etc..
 @import "vendor/index";        // Vendor - Import SCSS files that come from third parties
 
+h2 {
+  color:red
+}

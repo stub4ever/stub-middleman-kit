@@ -13,8 +13,6 @@ A Starter Kit for front-end development, it contains:
  - [Imagemin](https://github.com/imagemin/imagemin) Minify PNG, JPEG, GIF and SVG images
  - [pngquant](https://github.com/pornel/pngquant) Lossy PNG compressor
  - [Normalize](https://necolas.github.io/normalize.css/) A modern, HTML5-ready alternative to CSS resets
- - [Bourbon](https://github.com/thoughtbot/bourbon) Mixin library for Sass
- - [Neat](https://github.com/thoughtbot/neat) Semantic grid framework for Sass
  - Slim as a template engine for app views
  - gulp integration through middleman's [external asset pipeline](https://middlemanapp.com/advanced/external-pipeline)
 

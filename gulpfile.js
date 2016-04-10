@@ -62,10 +62,7 @@ gulp.task('stylesheets',function() {
   ];
 
   gulp.src(paths.stylesheetsEntryPoint)  // take all.scss only
-      .pipe(sass({
-          includePaths: require('node-bourbon').includePaths,
-          includePaths: require('node-neat').includePaths
-        }).on('error', sass.logError))
+      .pipe(sass().on('error', handleErrors))
       //.pipe(postcss(postCssPlugins)) // use Postcss Plugins
     .pipe( autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
      //.pipe(gulp.dest(paths.buildFolder + '/stylesheets')) // build new folder

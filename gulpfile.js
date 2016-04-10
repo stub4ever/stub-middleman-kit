@@ -62,7 +62,7 @@ gulp.task('stylesheets',function() {
   ];
 
   gulp.src(paths.stylesheetsEntryPoint)  // take all.scss only
-      .pipe(sass().on('error', handleErrors))
+      .pipe(sass().on('error', handleCssErrors))
       //.pipe(postcss(postCssPlugins)) // use Postcss Plugins
     .pipe( autoprefixer( 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
      //.pipe(gulp.dest(paths.buildFolder + '/stylesheets')) // build new folder
@@ -75,6 +75,13 @@ gulp.task('stylesheets',function() {
     .pipe(reload({stream:true}))
     .pipe(notify({ message: 'Stub: Styles task complete' }));
 });
+
+function handleCssErrors (error) {
+  // If you want details of the error in the console
+  console.log(error.toString());
+
+  this.emit('end');
+}
 
 /*
   Images
@@ -119,7 +126,7 @@ gulp.task('callbackImg', function(callback) {
 /*
  Scripts
 */
-function handleErrors() {
+function handleJsErrors() {
   var args = Array.prototype.slice.call(arguments);
   notify.onError({
     title: 'Compile Error',
@@ -143,7 +150,7 @@ function buildScript(file, watch) {
   function rebundle() {
     var stream = bundler.bundle();
     return stream
-      .on('error', handleErrors)
+      .on('error', handleJsErrors)
       .pipe(source(file))
       .pipe(gulp.dest(paths.javascriptsDist))
       .pipe(buffer())

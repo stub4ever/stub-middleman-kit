@@ -60,7 +60,7 @@ dependencies. You will need Node.js and npm on your system.
 cd name-project
 npm install
 ```
-Now you can simply run $``middleman``. This will start the BrowserSync proxy
+Now you can simply run $``bundle exec middleman``. This will start the BrowserSync proxy
 and it will open for you. You can then edit your stylesheets, images, javascript and slim. 
 Your browser will automatically reload on all devices.
 
